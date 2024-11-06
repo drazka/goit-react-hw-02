@@ -21,13 +21,21 @@ const App = () => {
     }));
   };
 
+  const resetFeedback = () => {
+    setFeedback({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
+  };
+
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
   const positivePercentage = totalFeedback > 0 ? (((feedback.good + (feedback.neutral / 2)) / totalFeedback) * 100).toFixed(2) : 0;
 
   return (
     <>
       <Description />
-      <Options updateFeedback={updateFeedback} />
+      <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} resetFeedback={resetFeedback} />
       {totalFeedback > 0 ? (
         <Feedback feedback={feedback} total={totalFeedback} positivePercentage={positivePercentage} />
       ) : (
