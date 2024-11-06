@@ -1,14 +1,14 @@
 import clsx from "clsx";
 import css from "./Options.module.css";
 
-const Options = () => {
+const Options = ({ updateFeedback }) => {
     return (
-  <div className={css.options}>
-    <button>Good</button>
-    <button>Neutral</button>
-    <button>Bad</button>
-    <button>Reset</button>
-  </div>
+      <div className={css.options}>
+        <button onClick={() => updateFeedback('good')}>Good</button>
+        <button onClick={() => updateFeedback('neutral')}>Neutral</button>
+        <button onClick={() => updateFeedback('bad')}>Bad</button>
+        <button className={css.reset} onClick={() => updateFeedback('reset')}>Reset</button>
+      </div>
     );
   };
   

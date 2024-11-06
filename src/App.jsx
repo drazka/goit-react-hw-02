@@ -7,19 +7,26 @@ import Options from './components/options/Options'
 import Feedback from './components/feedback/Feedback'
 
 const App = () => {
+  const [feedback, setFeedback] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  });
+
+  const updateFeedback = (feedbackType) => {
+    setFeedback((prevFeedback) => ({
+      ...prevFeedback,
+      [feedbackType]: prevFeedback[feedbackType] + 1,
+    }));
+  };
+
   return (
     <>
-      <Description/>
-      <Options/>
-      <Feedback/>
+      <Description />
+      <Options updateFeedback={updateFeedback} />
+      <Feedback feedback={feedback} />
     </>
   );
 };
 
-export default App
-
-const marks = {
-	good: 0,
-	neutral: 0,
-	bad: 0
-}
+export default App;
