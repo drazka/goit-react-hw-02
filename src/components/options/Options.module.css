@@ -6,3 +6,7 @@
 .reset {
     display: none;
 }
+
+button {
+    width: 100px;
+}
