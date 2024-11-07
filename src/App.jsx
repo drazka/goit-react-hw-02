@@ -12,33 +12,29 @@ const App = () => {
     const savedFeedback = localStorage.getItem('feedback');
     return savedFeedback ? JSON.parse(savedFeedback) : { good: 0, neutral: 0, bad: 0 };
   });
-
+  
   useEffect(() => {
     localStorage.setItem('feedback', JSON.stringify(feedback));
   }, [feedback]);
-
+  
   const updateFeedback = (feedbackType) => {
-    setFeedback((prevFeedback) => ({
-      ...prevFeedback,
-      [feedbackType]: prevFeedback[feedbackType] + 1,
-    }));
+    if (feedbackType === 'reset') {
+      setFeedback({ good: 0, neutral: 0, bad: 0 });
+    } else {
+      setFeedback((prevFeedback) => ({
+        ...prevFeedback,
+        [feedbackType]: prevFeedback[feedbackType] + 1,
+      }));
+    }
   };
-
-  const resetFeedback = () => {
-    setFeedback({
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    });
-  };
-
+  
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
   const positivePercentage = totalFeedback > 0 ? (((feedback.good + (feedback.neutral / 2)) / totalFeedback) * 100).toFixed(2) : 0;
-
+  
   return (
     <>
       <Description />
-      <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} resetFeedback={resetFeedback} />
+      <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} />
       {totalFeedback > 0 ? (
         <Feedback feedback={feedback} total={totalFeedback} positivePercentage={positivePercentage} />
       ) : (
@@ -46,6 +42,6 @@ const App = () => {
       )}
     </>
   );
-};
-
-export default App;
+  };
+  
+  export default App;

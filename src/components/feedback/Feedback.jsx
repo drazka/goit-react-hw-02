@@ -2,9 +2,6 @@ import clsx from "clsx";
 import css from "./Feedback.module.css";
 
 const Feedback = ({ feedback, total, positivePercentage }) => {
-
-  
-
   return (
     <div className={css.feedback}>
       <p>Good: {feedback.good}</p>
